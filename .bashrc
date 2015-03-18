@@ -1,7 +1,7 @@
 # .bashrc
 
 # export TERM="xterm-256color"
-export TERM=xterm-color
+export TERM=xterm-256color
 
 # Make basic commands more error proof or useful
 alias rm='rm -i'
@@ -68,13 +68,28 @@ DEFAULT='\033[39m' # Default
 alias hgr='hg revert'
 alias hgc='hg commit -m'
 alias hgp='hg push'
+alias hga='hg add'
+alias hgpu='hg pull -uv'
+function hgl() {
+    if [ -z "$1" ]
+    then
+        branch=$(hg branch)
+        echo -e "${green}log for $branch: ${DEFAULT}"
+        hg log -b $branch -v
+    else
+        echo -e "${green}log $1: ${DEFAULT}"
+        hg log -v $1
+    fi
+}
 function hgi() {
-    echo -e "${orange}incoming changeset(s):${DEFAULT}"
-    hg in -v
+    branch=$(hg branch)
+    echo -e "${orange}incoming changeset(s) for $branch:${DEFAULT}"
+    hg in -b $branch -v
 }
 function hgo() {
-    echo -e "${green}outgoing changeset(s): ${DEFAULT}"
-    hg out -v
+    branch=$(hg branch)
+    echo -e "${green}outgoing changeset(s) for $branch: ${DEFAULT}"
+    hg out -b $branch -v
 }
 function hgb() {
     if [ -z "$1" ]
@@ -124,25 +139,31 @@ function varien() {
     echo -e "  ${red}directory: ${green}$dir "
     echo -e "  ${purple}branch: ${green}$branch${DEFAULT}"
 }
+function node() {
+    cd ~/tickets/nodesearch-main
+    dir=$(pwd)
+    echo -e "  ${red}directory: ${green}$dir${DEFAULT}"
+}
+
 
 
 # Shelve using current branch's name
 function shelve() {
     branch=$(hg branch)
-    echo "hg shelve --name $branch"
+    echo -e "(${green}hg shelve --name $branch${DEFAULT})"
     hg shelve --name $branch
 }
 
 # List available shelves
 function shelves() {
-    echo "hg shelve --list"
+    echo -e "(${green}hg shelve --list${DEFAULT})"
     hg shelve --list
 }
 
 # Unshelve using current branch's name
 function unshelve() {
     branch=$(hg branch)
-    echo "hg unshelve --name $branch"
+    echo -e "(${green}hg unshelve --name $branch${DEFAULT})"
     hg unshelve --name $branch
 }
 
@@ -288,4 +309,7 @@ function tgt () {
 if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
+
+# change bash colors (di = dir; ex = executable; ln = symlinks)
+LS_COLORS=$LS_COLORS:'di=0;35;1:ex=92:ln=96;1' ; export LS_COLORS
 

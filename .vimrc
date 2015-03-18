@@ -109,13 +109,31 @@ autocmd BufEnter * cd %:p:h
 
 iabbrev </ </<C-X><C-O>
 
+" buffers
+set hidden
+nmap <leader>T :enew<CR>
+nmap <leader>l :bnext<CR>
+nmap <leader>h :bprevious<CR>
+nmap <leader>bq :bp <BAR> bd #<CR>
+nmap <leader>bl :ls<CR>
 
 " plugin: crtlp
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_match_window = 'top,order:ttb,min:1,max:10,results:10'
+nmap <leader>p :CtrlP<CR>
+" Setup some default ignores
+let g:ctrlp_custom_ignore = {
+\  'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
+\  'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
+\  }
+" Easy bindings for its various modes (searh buffer, mixed or buffers by most
+" recently used)
+nmap <leader>bb :CtrlPBuffer<cr>
+nmap <leader>bm :CtrlPMixed<cr>
+nmap <leader>bs :CtrlPMRU<cr>
 
 
 " plugin: tabularize common maps
@@ -139,11 +157,12 @@ let g:syntastic_check_on_wq = 0
 
 " plugin: Nerdtree
 " command NE NERDTree
-nmap <leader>nt :NERDTreeToggle <CR>
+" nmap <leader>nt :NERDTreeToggle <CR>
+map <Leader>nt <plug>NERDTreeTabsToggle<CR>
 let NERDTreeShowHidden=1
 let NERDTreeShowBookmarks=1
 " quit nerdtree if file closes
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif 
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 
 " plugin: T-comment (Faster shortcut for commenting)
@@ -153,6 +172,7 @@ map <leader>c <C-_><C-_>
 let g:airline_powerline_fonts = 1   " Airline - powerline font
 set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h20
 let g:airline#extensions#tabline#enabled = 1    " enable nice airline tabs
+let g:airline#extensions#tabline#fnamemod = 1   " show jsut the filename 
 let g:airline#extensions#tmuxline#enabled = 1
 let g:Powerline_symbols = 'fancy'
 set encoding=utf-8
@@ -166,4 +186,3 @@ let g:Powerline_mode_cs="S·BLOCK"
 " plugin: tagbar
 nmap <F9> :TagbarToggle<CR>
 nmap <leader>tb :TagbarToggle<CR>
-
