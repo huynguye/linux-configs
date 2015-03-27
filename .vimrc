@@ -5,13 +5,9 @@ call pathogen#helptags() " generate helptags for everything in 'runtimepath'
 
 let mapleader=","
 
-" explicitly set screen color to work better with tmux
+" system stuff
 set term=screen-256color
-
-
 set nocompatible
-filetype off
-
 scriptencoding utf-8
 set encoding=utf-8
 
@@ -22,11 +18,17 @@ filetype plugin indent on   " Turn on filetype detection
 inoremap <C-s> <esc>:w<cr>
 nnoremap <C-s> :w<cr>
 
+" in case forget to sudo edit a root file, just do w!! to save
+cmap w!! w !sudo tee % >/dev/null
+
 " map WQ mistakes
-command WQ wq
-command Wq wq
-command W w
-command Q q
+" command WQ wq
+" command Wq wq
+" command W w
+" command Q q
+
+" quickly enable/disable paste mode
+set pastetoggle=<F2>
 
 " map ,wq for quick write
 nnoremap <leader>wq <esc>:wq<cr>
@@ -48,13 +50,24 @@ set nowritebackup           " controls how vim does backups
 set noswapfile              " Do not use swap files
 
 " Tab and indent controls ------------------------------------------------
-set expandtab
-set autoindent
+" set expandtab
+set autoindent " always auto indent
+set copyindent " copy the previous indention on autoindenting
+set showmatch  " set show matching parenthesis
 set smartindent
 
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
+
+
+" Terminal stuff
+set history=1000         " remember more commands and search history
+set undolevels=1000      " use many muchos levels of undo
+" set title                " change the terminal's title
+" set visualbell           " don't beep
+" set noerrorbells         " don't beep
+
 
 " Whitespace at end of line controls -------------------------------------
 " Highlight trailing whitespace and long lines
@@ -62,7 +75,7 @@ highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
 " paragraph reformatting
-map q gq}
+" map q gq}
 
 set backspace=indent,eol,start
 
@@ -82,12 +95,12 @@ set nowrap
 
 "Highlight searching
 set hlsearch
+nmap <silent> ,/ :nohlsearch<CR>
 
 " case insensitive search
 set incsearch						" show search matches as you type
 set ignorecase						" ignore case when searching
 set smartcase						" match case if capital letter used
-set copyindent						" copy the previous indention on autoindenting
 
 "Hide mouse when typing
 set mousehide
@@ -116,12 +129,16 @@ nmap <leader>l :bnext<CR>
 nmap <leader>h :bprevious<CR>
 nmap <leader>bq :bp <BAR> bd #<CR>
 nmap <leader>bl :ls<CR>
+" nmap :q :bp <BAR> bd #<CR>
+
+" tabs
+nmap <leader>tq :tabclose<CR>
 
 " plugin: crtlp
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.bak     " MacOSX/Linux
 let g:ctrlp_match_window = 'top,order:ttb,min:1,max:10,results:10'
 nmap <leader>p :CtrlP<CR>
 " Setup some default ignores
@@ -143,6 +160,12 @@ nmap <Leader>a: :Tabularize /:\zs<CR>
 vmap <Leader>a: :Tabularize /:\zs<CR>
 nmap <Leader>a> :Tabularize /=><CR>
 vmap <Leader>a> :Tabularize /=><CR>
+nmap <Leader>a" :Tabularize /"<CR>
+vmap <Leader>a" :Tabularize /"<CR>
+nmap <Leader>a{ :Tabularize /{<CR>
+vmap <Leader>a{ :Tabularize /{<CR>
+nmap <Leader>a" :Tabularize /'<CR>
+vmap <Leader>a" :Tabularize /'<CR>
 
 
 " plugin syntastic

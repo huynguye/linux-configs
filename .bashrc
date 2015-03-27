@@ -41,6 +41,7 @@ alias html='cd ~/tickets/html; ls'
 alias ldp='cd app/code/local/LDP'
 alias fldp='cd app/design/frontend/ldp'
 alias pong='cd ~/html/pong; ls'
+alias snips='cd ~/.vim/bundle/snipmate.vim/snippets'
 
 # tmux shortcuts
 alias tmux='tmux -2'
@@ -67,9 +68,9 @@ DEFAULT='\033[39m' # Default
 # hg shortcuts
 alias hgr='hg revert'
 alias hgc='hg commit -m'
-alias hgp='hg push'
+alias hgp='hg pull -uv'
 alias hga='hg add'
-alias hgpu='hg pull -uv'
+alias hgm='hg meld .'
 function hgl() {
     if [ -z "$1" ]
     then
@@ -82,14 +83,17 @@ function hgl() {
     fi
 }
 function hgi() {
-    branch=$(hg branch)
-    echo -e "${orange}incoming changeset(s) for $branch:${DEFAULT}"
-    hg in -b $branch -v
+    # branch=$(hg branch)
+    # echo -e "${orange}incoming changeset(s) for $branch:${DEFAULT}"
+    echo -e "${orange}incoming changeset(s):${DEFAULT}"
+    hg in -v
 }
 function hgo() {
-    branch=$(hg branch)
-    echo -e "${green}outgoing changeset(s) for $branch: ${DEFAULT}"
-    hg out -b $branch -v
+    # branch=$(hg branch)
+    # echo -e "${green}outgoing changeset(s) for $branch: ${DEFAULT}"
+    # hg out -b $branch -v
+    echo -e "${orange}outgoing changeset(s):${DEFAULT}"
+    hg out -v
 }
 function hgb() {
     if [ -z "$1" ]
@@ -119,7 +123,8 @@ function hgu() {
     else
         hg update --check $1
         branch=$(hg branch)
-        echo -e "  ${red}current branch: ${green}$branch${DEFAULT}"
+        echo -e "${red}current branch: ${green}$branch${DEFAULT}"
+        shelves
     fi
 }
 
@@ -139,7 +144,7 @@ function varien() {
     echo -e "  ${red}directory: ${green}$dir "
     echo -e "  ${purple}branch: ${green}$branch${DEFAULT}"
 }
-function node() {
+function nsearch() {
     cd ~/tickets/nodesearch-main
     dir=$(pwd)
     echo -e "  ${red}directory: ${green}$dir${DEFAULT}"
@@ -150,20 +155,19 @@ function node() {
 # Shelve using current branch's name
 function shelve() {
     branch=$(hg branch)
-    echo -e "(${green}hg shelve --name $branch${DEFAULT})"
     hg shelve --name $branch
 }
 
 # List available shelves
 function shelves() {
-    echo -e "(${green}hg shelve --list${DEFAULT})"
+    echo -e "${red}available shelves: ${green}"
     hg shelve --list
+    echo -e "${DEFAULT}"
 }
 
 # Unshelve using current branch's name
 function unshelve() {
     branch=$(hg branch)
-    echo -e "(${green}hg unshelve --name $branch${DEFAULT})"
     hg unshelve --name $branch
 }
 
@@ -171,7 +175,6 @@ function unshelve() {
 # Custom variables (change as needed)
 HOME_DIR='/home/user'	# home directory
 TICKET_DIR='tickets'	# directory of where all the tickets to be stored
-
 
 #
 # LinkTicket: Create symbolic link (labeled '4ink-active') in /home/user/ for directory name $1
@@ -208,32 +211,6 @@ function gt () {
 }
 
 #
-# CreateTicket: Copy original, cloned directory to new directory $1
-#
-function ct () {
-	if [[ "$1" != "" ]]; then
-		if [ ! -d "$HOME_DIR/$TICKET_DIR/4ink-$1" ]; then
-			echo "Creating new ticket ($1) directory.  Hang on...";
-			cp -a "$HOME_DIR/$TICKET_DIR/4ink-main" "$HOME_DIR/$TICKET_DIR/4ink-$1";
-			cd "$HOME_DIR/$TICKET_DIR/4ink-$1";
-			#ln -s . ldproducts;
-			#ln -s . simplyink;
-			#ln -s . 123inkjets;
-			#ln -s . inkcartridges;
-			#ln -s . 4inkjets;
-			pwd;
-		else
-			echo "$1 already exists.  Going there now...";
-			cd "$HOME_DIR/$TICKET_DIR/4ink-$1";
-			pwd;
-		fi
-	else
-		echo "Correct usage: ct [ticket number]";
-	fi
-}
-
-
-#
 # ocelot: LinkTicket: Create symbolic link (labeled 'ocelot-active') in /home/user/ for directory name $1
 #
 function olt () {
@@ -264,26 +241,6 @@ function ogt () {
 		fi
 	else
 		echo "Correct usage: ogt [ticket number]";
-	fi
-}
-
-#
-# ocelot: CreateTicket: Copy original, cloned directory to new directory $1
-#
-function oct () {
-	if [[ "$1" != "" ]]; then
-		if [ ! -d "$HOME_DIR/$TICKET_DIR/ocelot-$1" ]; then
-			echo "Creating new ticket ($1) directory.  Hang on...";
-			cp -a "$HOME_DIR/$TICKET_DIR/ocelot-main" "$HOME_DIR/$TICKET_DIR/ocelot-$1";
-			cd "$HOME_DIR/$TICKET_DIR/ocelot-$1";
-			pwd;
-		else
-			echo "$1 already exists.  Going there now...";
-			cd "$HOME_DIR/$TICKET_DIR/ocelot-$1";
-			pwd;
-		fi
-	else
-		echo "Correct usage: oct [ticket number]";
 	fi
 }
 
