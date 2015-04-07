@@ -5,6 +5,9 @@ call pathogen#helptags() " generate helptags for everything in 'runtimepath'
 
 let mapleader=","
 
+" set ctags to look up until it finds a tags file
+set tags=tags;
+
 " system stuff
 set term=screen-256color
 set nocompatible
@@ -13,10 +16,24 @@ set encoding=utf-8
 
 syntax enable               " Turn on syntax highlighting
 filetype plugin indent on   " Turn on filetype detection
+set background=dark
+
+" let g:solorized_termcolors=256
+" colorscheme solarized
+" colors twilight256
+" color devbox-dark-256
+" color desert256
+" colors seoul256
+let g:gruvbox_italic=0
+colorscheme gruvbox
+" colors desert
 
 " map ctrl-s to save file
 inoremap <C-s> <esc>:w<cr>
 nnoremap <C-s> :w<cr>
+
+" kill whitespace
+nnoremap <leader>ws :%s/\s\+$//e<CR>
 
 " in case forget to sudo edit a root file, just do w!! to save
 cmap w!! w !sudo tee % >/dev/null
@@ -32,9 +49,6 @@ set pastetoggle=<F2>
 
 " map ,wq for quick write
 nnoremap <leader>wq <esc>:wq<cr>
-
-" set background=dark
-color devbox-dark-256
 
 set nofoldenable                " disable code folding
 let g:DisableAutoPHPFolding = 1 " disable PIV's folding
@@ -184,6 +198,7 @@ let g:syntastic_check_on_wq = 0
 map <Leader>nt <plug>NERDTreeTabsToggle<CR>
 let NERDTreeShowHidden=1
 let NERDTreeShowBookmarks=1
+let NERDTreeBookmarksSort=0
 " quit nerdtree if file closes
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
@@ -209,3 +224,7 @@ let g:Powerline_mode_cs="S·BLOCK"
 " plugin: tagbar
 nmap <F9> :TagbarToggle<CR>
 nmap <leader>tb :TagbarToggle<CR>
+
+" plugin: snipmatesreload snipmates
+nnoremap <F7> :call ReloadAllSnippets()
+

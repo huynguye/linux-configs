@@ -1,6 +1,5 @@
 # .bashrc
 
-# export TERM="xterm-256color"
 export TERM=xterm-256color
 
 # Make basic commands more error proof or useful
@@ -61,7 +60,6 @@ green='\033[0;32m'
 blue='\033[0;34m'
 purple='\033[0;35m'
 orange='\033[0;33m'
-orange='\033[0;33m'
 NC='\033[0m' # No Color
 DEFAULT='\033[39m' # Default
 
@@ -99,22 +97,22 @@ function hgb() {
     if [ -z "$1" ]
     then
         branch=$(hg branch)
-        echo -e "  ${red}current branch: ${green}$branch${DEFAULT}"
+        echo -e "  ${blue}current branch: ${green}$branch${DEFAULT}"
     else
         hg branch $1
         branch=$(hg branch)
-        echo -e "  ${red}current branch: ${green}$branch${DEFAULT}"
+        echo -e "  ${blue}current branch: ${green}$branch${DEFAULT}"
     fi
 }
 function hgbs() {
     branch=$(hg branch)
     hg branches
-    echo -e "  ${red}current branch: ${green}$branch${DEFAULT}"
+    echo -e "  ${blue}current branch: ${green}$branch${DEFAULT}"
 }
 function hgs() {
     branch=$(hg branch)
     hg stat
-    echo -e "  ${red}current branch: ${green}$branch${DEFAULT}"
+    echo -e "  ${blue}current branch: ${green}$branch${DEFAULT}"
 }
 function hgu() {
     if [ -z "$1" ]
@@ -123,7 +121,7 @@ function hgu() {
     else
         hg update --check $1
         branch=$(hg branch)
-        echo -e "${red}current branch: ${green}$branch${DEFAULT}"
+        echo -e "${blue}current branch: ${green}$branch${DEFAULT}"
         shelves
     fi
 }
@@ -134,20 +132,20 @@ function ocelot() {
     cd ~/tickets/ocelot-main
     branch=$(hg branch)
     dir=$(pwd)
-    echo -e "  ${red}directory: ${green}$dir"
+    echo -e "  ${blue}directory: ${green}$dir"
     echo -e "  ${purple}branch: ${green}$branch ${DEFAULT}"
 }
 function varien() {
     cd ~/tickets/4ink-main
     branch=$(hg branch)
     dir=$(pwd)
-    echo -e "  ${red}directory: ${green}$dir "
+    echo -e "  ${blue}directory: ${green}$dir "
     echo -e "  ${purple}branch: ${green}$branch${DEFAULT}"
 }
 function nsearch() {
     cd ~/tickets/nodesearch-main
     dir=$(pwd)
-    echo -e "  ${red}directory: ${green}$dir${DEFAULT}"
+    echo -e "  ${blue}directory: ${green}$dir${DEFAULT}"
 }
 
 
@@ -160,7 +158,7 @@ function shelve() {
 
 # List available shelves
 function shelves() {
-    echo -e "${red}available shelves: ${green}"
+    echo -e "${blue}available shelves: ${green}"
     hg shelve --list
     echo -e "${DEFAULT}"
 }
