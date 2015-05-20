@@ -19,10 +19,10 @@ alias ys='sudo yum search'
 alias yi='sudo yum install'
 alias h='history'
 alias his='history | grep '
-alias cl='clear; pwd'
+alias cl='clear; pwd; ls'
 alias j='jobs -l'
-alias ..='cd ..; pwd'
-alias c='cd ..; pwd'
+alias ..='cd ..; pwd; ls'
+alias c='cd ..; pwd; ls'
 
 # increase bash history
 HISTSIZE=10000
@@ -40,6 +40,7 @@ alias html='cd ~/tickets/html; ls'
 alias ldp='cd app/code/local/LDP'
 alias fldp='cd app/design/frontend/ldp'
 alias pong='cd ~/html/pong; ls'
+alias koth='cd ~/html/koth; ls'
 alias snips='cd ~/.vim/bundle/snipmate.vim/snippets'
 
 # tmux shortcuts

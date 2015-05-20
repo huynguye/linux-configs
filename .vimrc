@@ -131,8 +131,9 @@ set backupdir=~/tmp
 nmap j gj
 nmap k gk
 
-"Automatically change current directory to that of the file in the buffer
+" Automatically change current directory to that of the file in the buffer
 autocmd BufEnter * cd %:p:h
+" map ,cd :cd %:p:h<CR>
 
 iabbrev </ </<C-X><C-O>
 
@@ -178,8 +179,10 @@ nmap <Leader>a" :Tabularize /"<CR>
 vmap <Leader>a" :Tabularize /"<CR>
 nmap <Leader>a{ :Tabularize /{<CR>
 vmap <Leader>a{ :Tabularize /{<CR>
-nmap <Leader>a" :Tabularize /'<CR>
-vmap <Leader>a" :Tabularize /'<CR>
+nmap <Leader>a' :Tabularize /'<CR>
+vmap <Leader>a' :Tabularize /'<CR>
+nmap <Leader>a? :Tabularize /?<CR>
+vmap <Leader>a? :Tabularize /?<CR>
 
 
 " plugin syntastic
@@ -227,4 +230,58 @@ nmap <leader>tb :TagbarToggle<CR>
 
 " plugin: snipmatesreload snipmates
 nnoremap <F7> :call ReloadAllSnippets()
+
+
+" plugin: neocomplete
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+
+" plugin: neosnippets
+	" disable default neosnippets
+	" let g:neosnippet#disable_runtime_snippets = 0
+    "
+	" " Enable snipMate compatibility feature.
+	" let g:neosnippet#enable_snipmate_compatibility = 1
+    "
+	" " Tell Neosnippet about the other snippets
+	" let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate.vim/snippets'
+    "
+	" imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+	" smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+	" xmap <C-k>     <Plug>(neosnippet_expand_target)
+    "
+	" " SuperTab like snippets behavior.
+	" imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+	" smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+    "
+	" " For snippet_complete marker.
+	" if has('conceal')
+	"   set conceallevel=2 concealcursor=i
+	" endif
+
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  " let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  " let g:ctrlp_use_caching = 0
+endif
+
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" bind \ (backward slash) to grep shortcut
+command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+nnoremap \ :Ag<SPACE>
 
