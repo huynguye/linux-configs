@@ -131,6 +131,8 @@ set backupdir=~/tmp
 nmap j gj
 nmap k gk
 
+nmap <leader>nn :set invnumber<CR>
+
 " Automatically change current directory to that of the file in the buffer
 autocmd BufEnter * cd %:p:h
 " map ,cd :cd %:p:h<CR>

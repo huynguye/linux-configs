@@ -50,9 +50,14 @@ alias tl='tmux ls'
 alias ta='tmux attach'
 
 # dbsync (behrad) script
-alias pull-mage-cms='transfer-mage-cms --pull --db=ocelot_beta --dbhost=db4'
-alias pull-mage-landingpages='transfer-mage-landingpages --pull --db=ocelot_beta --dbhost=db4'
-alias pull-mage-nocms='transfer-mage-nocms --pull --db=ocelot_beta --dbhost=db4'
+alias pull-mage-cms='transfer-mage-cms --pull --db=ocelot_design --dbhost=web7'
+alias pull-mage-landingpages='transfer-mage-landingpages --pull --db=ocelot_design --dbhost=web7'
+alias pull-mage-nocms='transfer-mage-nocms --pull --db=ocelot_design --dbhost=web7'
+
+# alias pull-mage-cms='transfer-mage-cms --pull --db=ocelot_beta --dbhost=db4'
+# alias pull-mage-landingpages='transfer-mage-landingpages --pull --db=ocelot_beta --dbhost=db4'
+# alias pull-mage-nocms='transfer-mage-nocms --pull --db=ocelot_beta --dbhost=db4'
+
 alias qa-push-cms='transfer-mage-cms --out'
 
 # color for output
