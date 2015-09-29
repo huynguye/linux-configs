@@ -132,6 +132,8 @@ nmap j gj
 nmap k gk
 
 nmap <leader>nn :set invnumber<CR>
+nmap <leader>24 :set ts=2 sts=2 noet<CR>:retab!<CR>:set ts=4 sts=4 et<CR>:retab!<CR>
+nmap <leader>ww :set invwrap<CR>
 
 " Automatically change current directory to that of the file in the buffer
 autocmd BufEnter * cd %:p:h
@@ -183,8 +185,14 @@ nmap <Leader>a{ :Tabularize /{<CR>
 vmap <Leader>a{ :Tabularize /{<CR>
 nmap <Leader>a' :Tabularize /'<CR>
 vmap <Leader>a' :Tabularize /'<CR>
+nmap <Leader>a. :Tabularize /.<CR>
+vmap <Leader>a. :Tabularize /.<CR>
 nmap <Leader>a? :Tabularize /?<CR>
 vmap <Leader>a? :Tabularize /?<CR>
+nmap <Leader>a/ :Tabularize /\/\/<CR>
+vmap <Leader>a/ :Tabularize /\/\/<CR>
+nmap <Leader>a# :Tabularize /#<CR>
+vmap <Leader>a# :Tabularize /#<CR>
 
 
 " plugin syntastic

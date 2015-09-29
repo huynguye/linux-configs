@@ -23,6 +23,8 @@ alias cl='clear; pwd; ls'
 alias j='jobs -l'
 alias ..='cd ..; pwd; ls'
 alias c='cd ..; pwd; ls'
+alias sudo='sudo LD_LIBRARY_PATH=/usr/local/lib '
+alias gmeld='git difftool --tool=meld -y --dir-diff '
 
 # increase bash history
 HISTSIZE=10000
@@ -36,9 +38,11 @@ stty -ixoff
 
 # Personal directory navigation
 alias ticks='cd ~/tickets; ls'
+alias ws='cd ~/workspace; ls'
 alias html='cd ~/tickets/html; ls'
-alias ldp='cd app/code/local/LDP'
-alias fldp='cd app/design/frontend/ldp'
+alias ldp='cd /home/user/workspace/ocelot-main/app/code/local/LDP; pwd'
+alias fldp='cd /home/user/workspace/ocelot-main/app/design/frontend/ldp; pwd'
+alias vad='cd /home/user/workspace/4ink-main/varien/admin; pwd'
 alias pong='cd ~/html/pong; ls'
 alias koth='cd ~/html/koth; ls'
 alias snips='cd ~/.vim/bundle/snipmate.vim/snippets'
@@ -50,9 +54,9 @@ alias tl='tmux ls'
 alias ta='tmux attach'
 
 # dbsync (behrad) script
-alias pull-mage-cms='transfer-mage-cms --pull --db=ocelot_design --dbhost=web7'
-alias pull-mage-landingpages='transfer-mage-landingpages --pull --db=ocelot_design --dbhost=web7'
-alias pull-mage-nocms='transfer-mage-nocms --pull --db=ocelot_design --dbhost=web7'
+alias pull-mage-cms='transfer-mage-cms --pull --db=ocelot_qa1 --dbhost=web7'
+alias pull-mage-landingpages='transfer-mage-landingpages --pull --db=ocelot_qa1 --dbhost=web7'
+alias pull-mage-nocms='transfer-mage-nocms --pull --db=ocelot_qa1 --dbhost=web7'
 
 # alias pull-mage-cms='transfer-mage-cms --pull --db=ocelot_beta --dbhost=db4'
 # alias pull-mage-landingpages='transfer-mage-landingpages --pull --db=ocelot_beta --dbhost=db4'
@@ -135,18 +139,18 @@ function hgu() {
 
 # quick access code functions
 function ocelot() {
-    cd ~/tickets/ocelot-main
-    branch=$(hg branch)
+    cd ~/workspace/ocelot-main
+    # branch=$(hg branch)
     dir=$(pwd)
-    echo -e "  ${blue}directory: ${green}$dir"
-    echo -e "  ${purple}branch: ${green}$branch ${DEFAULT}"
+    echo -e "  ${blue}directory: ${green}$dir ${DEFAULT}"
+    # echo -e "  ${purple}branch: ${green}$branch ${DEFAULT}"
 }
 function varien() {
-    cd ~/tickets/4ink-main
-    branch=$(hg branch)
+    cd ~/workspace/4ink-main
+    # branch=$(hg branch)
     dir=$(pwd)
-    echo -e "  ${blue}directory: ${green}$dir "
-    echo -e "  ${purple}branch: ${green}$branch${DEFAULT}"
+    echo -e "  ${blue}directory: ${green}$dir ${DEFAULT}"
+    # echo -e "  ${purple}branch: ${green}$branch${DEFAULT}"
 }
 function nsearch() {
     cd ~/tickets/nodesearch-main
