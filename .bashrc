@@ -54,9 +54,9 @@ alias tl='tmux ls'
 alias ta='tmux attach'
 
 # dbsync (behrad) script
-alias pull-mage-cms='transfer-mage-cms --pull --db=ocelot_qa1 --dbhost=web7'
-alias pull-mage-landingpages='transfer-mage-landingpages --pull --db=ocelot_qa1 --dbhost=web7'
-alias pull-mage-nocms='transfer-mage-nocms --pull --db=ocelot_qa1 --dbhost=web7'
+alias pull-mage-cms='transfer-mage-cms --pull --db=ocelot_design --dbhost=web7'
+alias pull-mage-landingpages='transfer-mage-landingpages --pull --db=ocelot_design --dbhost=web7'
+alias pull-mage-nocms='transfer-mage-nocms --pull --db=ocelot_design --dbhost=web7'
 
 # alias pull-mage-cms='transfer-mage-cms --pull --db=ocelot_beta --dbhost=db4'
 # alias pull-mage-landingpages='transfer-mage-landingpages --pull --db=ocelot_beta --dbhost=db4'
@@ -274,6 +274,12 @@ function tgt () {
 if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
+
+# Source global definitions
+if [ -f "$HOME/.bash_ps1" ]; then
+	. "$HOME/.bash_ps1"
+fi
+
 
 # change bash colors (di = dir; ex = executable; ln = symlinks)
 LS_COLORS=$LS_COLORS:'di=0;35;1:ex=92:ln=96;1' ; export LS_COLORS

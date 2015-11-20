@@ -27,6 +27,7 @@ set background=dark
 let g:gruvbox_italic=0
 colorscheme gruvbox
 " colors desert
+" color dracula
 
 " map ctrl-s to save file
 inoremap <C-s> <esc>:w<cr>
