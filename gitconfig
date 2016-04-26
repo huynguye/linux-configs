@@ -1,0 +1,16 @@
+[user]
+    name = Huy Nguyen
+    email = huyn@ldproducts.com
+[merge]
+    tool = meld
+[alias]
+    meld = difftool --tool=meld --dir-diff
+[push]
+    default = matching
+[core]
+    autocrlf = false
+    editor = vim
+[diff]
+    tool = meld
+# [diff]
+#   external = git-meld

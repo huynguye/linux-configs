@@ -11,6 +11,7 @@ alias mv='mv -i'
 alias mkdir='mkdir -p'
 alias du='du -kh'
 alias df='df -kTh'
+alias gmeld='meld .'
 
 # Ease of use shortcuts
 alias vi='vim'
@@ -95,6 +96,12 @@ fi
 if [ -f "$HOME/.bash_ps1" ]; then
 	. "$HOME/.bash_ps1"
 fi
+
+# Source bash profile (environment variables)
+if [ -f "$HOME/.bash_profile" ]; then
+	. "$HOME/.bash_profile"
+fi
+
 
 
 # change bash colors (di = dir; ex = executable; ln = symlinks)
