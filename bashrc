@@ -97,13 +97,6 @@ if [ -f "$HOME/.bash_ps1" ]; then
 	. "$HOME/.bash_ps1"
 fi
 
-# Source bash profile (environment variables)
-if [ -f "$HOME/.bash_profile" ]; then
-	. "$HOME/.bash_profile"
-fi
-
-
-
 # change bash colors (di = dir; ex = executable; ln = symlinks)
 LS_COLORS=$LS_COLORS:'di=0;35;1:ex=92:ln=96;1' ; export LS_COLORS
 
