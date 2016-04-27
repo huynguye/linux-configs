@@ -24,7 +24,7 @@ cd fonts
 ./install.sh
 
 # install meld, chrome, wine
-sudo apt-get -y install meld chromium chromium-l10n wine
+sudo apt-get -y install meld chromium chromium-l10n
 
 # remove sl
 sudo apt-get remove sl
