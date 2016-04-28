@@ -2,6 +2,8 @@
 # Personal Settings
 ###################
 
+source ~/.git-prompt
+
 export TERM=xterm-256color
 
 # Make basic commands more error proof or useful

@@ -12,6 +12,7 @@ cat gvimrc >> ~/.gvimrc
 cat bash_ps1 >> ~/.bash_ps1
 cat bash_profile >> ~/.bash_profile
 cat bashrc >> ~/.bashrc
+cat git-prompt >> ~/.git-prompt
 source ~/.bashrc
 
 # setup gitconfig file
