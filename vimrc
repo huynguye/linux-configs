@@ -1,12 +1,16 @@
 " Pathogen
 filetype off " Pathogen needs to run before plugin indent on
-call pathogen#infect()
+
+execute pathogen#infect()
 call pathogen#helptags() " generate helptags for everything in 'runtimepath'
 
 let mapleader=","
 
 " set ctags to look up until it finds a tags file
 set tags=tags;
+
+" default: 4000 - lowered to 100 for gitgutter plugin
+set updatetime=100
 
 " system stuff
 set term=screen-256color
@@ -18,38 +22,22 @@ syntax enable               " Turn on syntax highlighting
 filetype plugin indent on   " Turn on filetype detection
 set background=dark
 
-" let g:solorized_termcolors=256
-" colorscheme solarized
-" colors twilight256
-" color devbox-dark-256
-" color desert256
-" colors seoul256
 let g:gruvbox_italic=0
 colorscheme gruvbox
 " colors desert
-" color dracula
 
 " map ctrl-s to save file
 inoremap <C-s> <esc>:w<cr>
 nnoremap <C-s> :w<cr>
 
+" map ,wq for quick write
+nnoremap <leader>wq <esc>:wq<cr>
+
 " kill whitespace
 nnoremap <leader>ws :%s/\s\+$//e<CR>
 
-" in case forget to sudo edit a root file, just do w!! to save
-cmap w!! w !sudo tee % >/dev/null
-
-" map WQ mistakes
-" command WQ wq
-" command Wq wq
-" command W w
-" command Q q
-
 " quickly enable/disable paste mode
 set pastetoggle=<F2>
-
-" map ,wq for quick write
-nnoremap <leader>wq <esc>:wq<cr>
 
 set nofoldenable                " disable code folding
 let g:DisableAutoPHPFolding = 1 " disable PIV's folding
@@ -65,7 +53,7 @@ set nowritebackup           " controls how vim does backups
 set noswapfile              " Do not use swap files
 
 " Tab and indent controls ------------------------------------------------
-" set expandtab
+set expandtab
 set autoindent " always auto indent
 set copyindent " copy the previous indention on autoindenting
 set showmatch  " set show matching parenthesis
@@ -88,9 +76,6 @@ set undolevels=1000      " use many muchos levels of undo
 " Highlight trailing whitespace and long lines
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
-
-" paragraph reformatting
-" map q gq}
 
 set backspace=indent,eol,start
 
@@ -133,8 +118,6 @@ nmap j gj
 nmap k gk
 
 nmap <leader>nn :set invnumber<CR>
-nmap <leader>24 :set ts=2 sts=2 noet<CR>:retab!<CR>:set ts=4 sts=4 et<CR>:retab!<CR>
-nmap <leader>ww :set invwrap<CR>
 
 " Automatically change current directory to that of the file in the buffer
 autocmd BufEnter * cd %:p:h
@@ -186,14 +169,8 @@ nmap <Leader>a{ :Tabularize /{<CR>
 vmap <Leader>a{ :Tabularize /{<CR>
 nmap <Leader>a' :Tabularize /'<CR>
 vmap <Leader>a' :Tabularize /'<CR>
-nmap <Leader>a. :Tabularize /.<CR>
-vmap <Leader>a. :Tabularize /.<CR>
 nmap <Leader>a? :Tabularize /?<CR>
 vmap <Leader>a? :Tabularize /?<CR>
-nmap <Leader>a/ :Tabularize /\/\/<CR>
-vmap <Leader>a/ :Tabularize /\/\/<CR>
-nmap <Leader>a# :Tabularize /#<CR>
-vmap <Leader>a# :Tabularize /#<CR>
 
 
 " plugin syntastic
@@ -242,57 +219,22 @@ nmap <leader>tb :TagbarToggle<CR>
 " plugin: snipmatesreload snipmates
 nnoremap <F7> :call ReloadAllSnippets()
 
+" plugin: gitgutter
+nmap <leader>g :GitGutterToggle<CR>
 
-" plugin: neocomplete
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
+" syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
+" add yaml stuffs
+au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
-" plugin: neosnippets
-	" disable default neosnippets
-	" let g:neosnippet#disable_runtime_snippets = 0
-    "
-	" " Enable snipMate compatibility feature.
-	" let g:neosnippet#enable_snipmate_compatibility = 1
-    "
-	" " Tell Neosnippet about the other snippets
-	" let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate.vim/snippets'
-    "
-	" imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-	" smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-	" xmap <C-k>     <Plug>(neosnippet_expand_target)
-    "
-	" " SuperTab like snippets behavior.
-	" imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-	" smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-    "
-	" " For snippet_complete marker.
-	" if has('conceal')
-	"   set conceallevel=2 concealcursor=i
-	" endif
-
-" The Silver Searcher
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  " let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  " let g:ctrlp_use_caching = 0
-endif
-
-" bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-
-" bind \ (backward slash) to grep shortcut
-command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-nnoremap \ :Ag<SPACE>
+" indentline
+nmap <leader>id :IndentLinesToggle<CR>
 

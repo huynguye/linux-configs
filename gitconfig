@@ -6,10 +6,11 @@
 [alias]
     meld = difftool --tool=meld --dir-diff
 [push]
-    default = matching
+	default = simple
 [core]
-    autocrlf = false
+	autocrlf = input
     editor = vim
+	eol = lf
 [diff]
     tool = meld
 # [diff]
