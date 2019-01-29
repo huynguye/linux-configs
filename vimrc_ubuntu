@@ -1,37 +1,42 @@
-" Pathogen
-filetype off " Pathogen needs to run before plugin indent on
 
 execute pathogen#infect()
-call pathogen#helptags() " generate helptags for everything in 'runtimepath'
+
+" Indent automatically depending on filetype
+filetype indent on
+set autoindent
+
+" Turn on line numbering. Turn it off with "set nonu" 
+set number
+
+syntax enable			" Turn on syntax highlighting
+syntax on				" Set syntax on
+set background=dark
+" let g:solarized_termcolors=256
+" colorscheme solarized
+" colorscheme delek
+
+" Case insensitive search
+set ic
+
+" Higlhight search
+set hls
+
+" Wrap text instead of being on one line
+set lbr
+
+
 
 let mapleader=","
 
 " set ctags to look up until it finds a tags file
 set tags=tags;
 
-" default: 4000 - lowered to 100 for gitgutter plugin
-set updatetime=100
-
 " system stuff
-set term=screen-256color
 set nocompatible
 scriptencoding utf-8
 set encoding=utf-8
-
-syntax enable               " Turn on syntax highlighting
 filetype plugin indent on   " Turn on filetype detection
-set background=dark
 
-let g:gruvbox_italic=0
-colorscheme gruvbox
-" colors desert
-
-" map ctrl-s to save file
-inoremap <C-s> <esc>:w<cr>
-nnoremap <C-s> :w<cr>
-
-" map ,wq for quick write
-nnoremap <leader>wq <esc>:wq<cr>
 
 " kill whitespace
 nnoremap <leader>ws :%s/\s\+$//e<CR>
@@ -64,7 +69,6 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 
-
 " Terminal stuff
 set history=1000         " remember more commands and search history
 set undolevels=1000      " use many muchos levels of undo
@@ -72,14 +76,12 @@ set title                " change the terminal's title
 set visualbell           " don't beep
 set noerrorbells         " don't beep
 
-
 " Whitespace at end of line controls -------------------------------------
 " Highlight trailing whitespace and long lines
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
 set backspace=indent,eol,start
-
 set uc=0
 
 "Show command in bottom right portion of the screen
@@ -91,8 +93,6 @@ set laststatus=2
 "Prefer a slightly higher line height
 set linespace=3
 
-"Better line wrapping
-set nowrap
 
 "Highlight searching
 set hlsearch
@@ -119,6 +119,8 @@ nmap j gj
 nmap k gk
 
 nmap <leader>nn :set invnumber<CR>
+nmap <leader>24 :set ts=2 sts=2 noet<CR>:retab!<CR>:set ts=4 sts=4 et<CR>:retab!<CR>
+nmap <leader>ww :set invwrap<CR>
 
 " Automatically change current directory to that of the file in the buffer
 autocmd BufEnter * cd %:p:h
@@ -156,7 +158,6 @@ nmap <leader>bb :CtrlPBuffer<cr>
 nmap <leader>bm :CtrlPMixed<cr>
 nmap <leader>bs :CtrlPMRU<cr>
 
-
 " plugin: tabularize common maps
 nmap <Leader>a= :Tabularize /=<CR>
 vmap <Leader>a= :Tabularize /=<CR>
@@ -170,9 +171,14 @@ nmap <Leader>a{ :Tabularize /{<CR>
 vmap <Leader>a{ :Tabularize /{<CR>
 nmap <Leader>a' :Tabularize /'<CR>
 vmap <Leader>a' :Tabularize /'<CR>
+nmap <Leader>a. :Tabularize /.<CR>
+vmap <Leader>a. :Tabularize /.<CR>
 nmap <Leader>a? :Tabularize /?<CR>
 vmap <Leader>a? :Tabularize /?<CR>
-
+nmap <Leader>a/ :Tabularize /\/\/<CR>
+vmap <Leader>a/ :Tabularize /\/\/<CR>
+nmap <Leader>a# :Tabularize /#<CR>
+vmap <Leader>a# :Tabularize /#<CR>
 
 " plugin syntastic
 set statusline+=%#warningmsg#
@@ -183,6 +189,8 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+" plugin: T-comment (Faster shortcut for commenting)
+map <leader>c <C-_><C-_>
 
 " plugin: Nerdtree
 " command NE NERDTree
@@ -193,10 +201,6 @@ let NERDTreeShowBookmarks=1
 let NERDTreeBookmarksSort=0
 " quit nerdtree if file closes
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-
-" plugin: T-comment (Faster shortcut for commenting)
-map <leader>c <C-_><C-_>
 
 " plugin: airline
 let g:airline_powerline_fonts = 1   " Airline - powerline font
@@ -213,29 +217,9 @@ let g:Powerline_mode_cv="V·BLOCK"
 let g:Powerline_mode_S="S·LINE"
 let g:Powerline_mode_cs="S·BLOCK"
 
-" plugin: tagbar
-nmap <F9> :TagbarToggle<CR>
-nmap <leader>tb :TagbarToggle<CR>
-
-" plugin: snipmatesreload snipmates
-nnoremap <F7> :call ReloadAllSnippets()
-
-" plugin: gitgutter
-nmap <leader>g :GitGutterToggle<CR>
-
-" syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-" add yaml stuffs
-au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-
-" indentline
-nmap <leader>id :IndentLinesToggle<CR>
+" navigating splits more naturally
+" nnoremap <C-J> <C-W><C-J>
+" nnoremap <C-K> <C-W><C-K>
+" nnoremap <C-L> <C-W><C-L>
+" nnoremap <C-H> <C-W><C-H>
 

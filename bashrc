@@ -55,39 +55,18 @@ alias ta='tmux attach'
 alias pull-mage-cms='transfer-mage-cms --pull --db=ocelot_design --dbhost=web7'
 alias pull-mage-landingpages='transfer-mage-landingpages --pull --db=ocelot_design --dbhost=web7'
 alias pull-mage-nocms='transfer-mage-nocms --pull --db=ocelot_design --dbhost=web7'
-
 alias qa-push-cms='transfer-mage-cms --out'
-
-# color for output
-red='\033[0;31m'
-green='\033[0;32m'
-blue='\033[0;34m'
-purple='\033[0;35m'
-orange='\033[0;33m'
-NC='\033[0m' # No Color
-DEFAULT='\033[39m' # Default
 
 # quick access code functions
 function ocelot() {
     cd ~/tickets/ocelot-main
-    branch=$(hg branch)
-    dir=$(pwd)
-    echo -e "  ${blue}directory: ${green}$dir"
-    echo -e "  ${purple}branch: ${green}$branch ${DEFAULT}"
 }
 function varien() {
     cd ~/tickets/4ink-main
-    branch=$(hg branch)
-    dir=$(pwd)
-    echo -e "  ${blue}directory: ${green}$dir "
-    echo -e "  ${purple}branch: ${green}$branch${DEFAULT}"
 }
 function nsearch() {
     cd ~/tickets/nodesearch-main
-    dir=$(pwd)
-    echo -e "  ${blue}directory: ${green}$dir${DEFAULT}"
 }
-
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
