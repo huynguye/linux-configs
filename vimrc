@@ -221,7 +221,13 @@ nmap <leader>tb :TagbarToggle<CR>
 nnoremap <F7> :call ReloadAllSnippets()
 
 " plugin: gitgutter
-nmap <leader>g :GitGutterToggle<CR>
+let g:gitgutter_map_keys = 0
+nmap <leader>gg :GitGutterToggle<CR>
+nmap <leader>gp <Plug>GitGutterPreviewHunk
+nmap <leader>gu <Plug>GitGutterUndoHunk
+nmap <leader>gb <Plug>GitGutterPrevHunk
+nmap <leader>gn <Plug>GitGutterNextHunk
+
 
 " syntastic
 set statusline+=%#warningmsg#
@@ -238,4 +244,33 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 " indentline
 nmap <leader>id :IndentLinesToggle<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" gutentags settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:gutentags_enabled_dirs = ['~/repositories']
+let g:gutentags_enabled_user_func = 'CheckEnabledDirs'
+function! CheckEnabledDirs(file)
+    let file_path = fnamemodify(a:file, ':p:h')
+
+    try
+        let gutentags_root = gutentags#get_project_root(file_path)
+        if filereadable(gutentags_root . '/.withtags')
+            return 1
+        endif
+    catch
+    endtry
+
+    for enabled_dir in g:gutentags_enabled_dirs
+        let enabled_path = fnamemodify(enabled_dir, ':p:h')
+
+        if match(file_path, enabled_path) == 0
+            return 1
+        endif
+    endfor
+
+    return 0
+endfunction
+
 
