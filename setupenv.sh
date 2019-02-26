@@ -54,11 +54,10 @@ if [ ! -d "vim-nerdtree-tabs" ] ; then git clone https://github.com/jistr/vim-ne
 if [ ! -d "vim-tmux-navigator" ] ; then git clone https://github.com/christoomey/vim-tmux-navigator.git ; fi
 if [ ! -d "vim-twig" ] ; then git clone https://github.com/evidens/vim-twig.git ; fi
 if [ ! -d "yaml-vim" ] ; then git clone https://github.com/mrk21/yaml-vim.git ; fi
-if [ ! -d "YouCompleteMe" ] ; then git clone https://github.com/Valloric/YouCompleteMe.git ; fi
+# if [ ! -d "YouCompleteMe" ] ; then git clone https://github.com/Valloric/YouCompleteMe.git ; fi
 
 # update all repos
 find . -name .git -type d | xargs -n1 -P4 -I% git --git-dir=% --work-tree=%/.. remote update -p
-
 
 ##########################################
 # (optional) Configure/setup YouCompleteMe

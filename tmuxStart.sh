@@ -14,7 +14,8 @@ tmux new-window -t "crana:0" -n bash -c $HOME
 cd $HOME
 tmux new-session -s "aa" -n ocelot -d -c "/home/debian-admin/repositories/ocelot-main"
 tmux new-window -t "aa:2" -n varien -c "/home/debian-admin/repositories/4ink-main"
-tmux new-window -t "aa:3" -n gov-quote -c "/home/debian-admin/repositories/gov-quote"
+tmux new-window -t "aa:3" -n hydra -c "/home/debian-admin/repositories/hydra/www"
+tmux new-window -t "aa:4" -n gov-quote -c "/home/debian-admin/repositories/gov-quote"
 
 # 3rd session (qst)
 cd $HOME
@@ -24,7 +25,7 @@ tmux new-session -s "qst" -n qst -d -c "/home/debian-admin/repositories/qst/quik
 tmux new-session -s "docker" -n docker -d -c "/home/debian-admin/repositories/ld-api/docker"
 tmux split-window -d -p 50 -c "/home/debian-admin/repositories/4ink-main/docker"
 tmux split-window -d -p 50 -t 0 -c "/home/debian-admin/repositories/crana/docker"
-tmux split-window -d -p 50 -t 2 -c "/home/debian-admin/repositories/qst/quikshiptoner.com/www"
+tmux split-window -d -p 50 -t 2 -c "/home/debian-admin/repositories/qst/docker2"
 
 # 5th session (for debugging live magento site)
 tmux new-session -s "live-magento" -n frontend-code -d

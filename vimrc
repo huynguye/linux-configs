@@ -58,7 +58,6 @@ set autoindent " always auto indent
 set copyindent " copy the previous indention on autoindenting
 set showmatch  " set show matching parenthesis
 set smartindent
-set smarttab
 
 set tabstop=4
 set softtabstop=4
@@ -68,9 +67,9 @@ set shiftwidth=4
 " Terminal stuff
 set history=1000         " remember more commands and search history
 set undolevels=1000      " use many muchos levels of undo
-set title                " change the terminal's title
-set visualbell           " don't beep
-set noerrorbells         " don't beep
+" set title                " change the terminal's title
+" set visualbell           " don't beep
+" set noerrorbells         " don't beep
 
 
 " Whitespace at end of line controls -------------------------------------
@@ -111,6 +110,7 @@ set wildmenu
 
 "Map escape key to jj -- much faster
 imap jj <esc>
+imap <C-c> <Esc>
 
 set backupdir=~/tmp
 
@@ -228,7 +228,6 @@ nmap <leader>gu <Plug>GitGutterUndoHunk
 nmap <leader>gb <Plug>GitGutterPrevHunk
 nmap <leader>gn <Plug>GitGutterNextHunk
 
-
 " syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -272,5 +271,4 @@ function! CheckEnabledDirs(file)
 
     return 0
 endfunction
-
 
